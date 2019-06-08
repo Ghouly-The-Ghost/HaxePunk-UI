@@ -1,5 +1,7 @@
 import haxepunk.Engine;
 import haxepunk.HXP;
+import haxepunk.debug.Console;
+
 import haxepunk.screen.UniformScaleMode;
 import haxepunk.ui.UI;
 
@@ -8,7 +10,7 @@ class Main extends Engine
 {
 	override public function init()
 	{
-		HXP.console.enable();
+		// Console.enable(); // enable your console.
 		HXP.scene = new MainScene();
 		UI.skin = new haxepunk.ui.skins.NESSkin();
 

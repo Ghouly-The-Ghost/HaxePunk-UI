@@ -2,6 +2,7 @@ import haxepunk.Scene;
 
 import haxepunk.HXP;
 import haxepunk.ui.Button;
+import haxepunk.ui.layout.LayoutGroup;
 import haxepunk.ui.MouseManager;
 
 class PopupScene extends Scene
@@ -10,12 +11,18 @@ class PopupScene extends Scene
 	{
 		super();
 
-		transparent = true;
+		bgAlpha = 0.55;
 
 		var mouseManager = new MouseManager();
 		add(mouseManager);
 
-		var btn = new Button(16, 16, 256, 256, "BIG BUTTON 2", function() HXP.engine.popScene(), mouseManager);
-		add(btn);
+		var parentLayout = new LayoutGroup(LayoutType.Horizontal);
+		parentLayout.layoutData.anchorX = parentLayout.layoutData.anchorY = 0.25;
+		// parentLayout.layoutData.offsetX = parentLayout.layoutData.offsetY = -256/2;
+		
+		var btn = new Button(0, 0, 256, 256, "Go Back", function() HXP.engine.popScene(), mouseManager);
+		parentLayout.add(btn);
+		
+		add(parentLayout);
 	}
 }
