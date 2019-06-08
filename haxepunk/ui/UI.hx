@@ -5,7 +5,7 @@ import haxepunk.ui.UIComponent;
 import haxepunk.Entity;
 import haxepunk.HXP;
 import haxepunk.Scene;
-import haxepunk.input.Input;
+import haxepunk.input.Mouse;
 import haxepunk.ui.skin.Skin;
 
 @:final class UI
@@ -44,8 +44,8 @@ import haxepunk.ui.skin.Skin;
 		var my:Float = w.mouseY;
 		if (screenMouse)
 		{
-			mx = Input.mouseX;
-			my = Input.mouseY;
+			mx = Mouse.mouseX;
+			my = Mouse.mouseY;
 		}
 		var x:Float = component.x;
 		var y:Float = component.y;

@@ -1,10 +1,13 @@
 package haxepunk.ui;
 
-import flash.errors.Error;
-import flash.geom.Point;
+// import flash.errors.Error;
+// import flash.geom.Point;
+import haxepunk.App;
+
 import haxepunk.HXP;
 import haxepunk.Entity;
 import haxepunk.input.Input;
+import haxepunk.input.Mouse;
 import haxepunk.ui.UIComponent;
 
 /**
@@ -100,12 +103,15 @@ class MouseManager extends Entity
 	{
 		super.update();
 
+		var mouseX = HXP.app.getMouseX();
+		var mouseY = HXP.app.getMouseY();
+
 		var collisions:Array<Entity> = _collisions;
 		// make sure the mouse is onscreen before checking for collisions
-		if (HXP.stage.mouseX >= HXP.screen.x &&
-			HXP.stage.mouseY >= HXP.screen.y &&
-			HXP.stage.mouseX <= HXP.screen.x + HXP.screen.width &&
-			HXP.stage.mouseY <= HXP.screen.y + HXP.screen.height)
+		if (mouseX >= HXP.screen.x &&
+			mouseY >= HXP.screen.y &&
+			mouseX <= HXP.screen.x + HXP.screen.width &&
+			mouseY <= HXP.screen.y + HXP.screen.height)
 		{
 			scene.collidePointInto(type, scene.mouseX, scene.mouseY, collisions);
 		}
@@ -141,7 +147,7 @@ class MouseManager extends Entity
 			if (current == null) continue;
 			if (current.onPress != null)
 			{
-				if (Input.mousePressed)
+				if (Mouse.mousePressed)
 				{
 					current.onPress();
 				}
@@ -155,7 +161,7 @@ class MouseManager extends Entity
 			if (current == null) continue;
 			if (current.onRelease != null)
 			{
-				if (Input.mouseReleased)
+				if (Mouse.mouseReleased)
 				{
 					current.onRelease();
 				}

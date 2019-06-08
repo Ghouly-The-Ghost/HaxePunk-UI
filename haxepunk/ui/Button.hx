@@ -1,13 +1,17 @@
 package haxepunk.ui;
 
-import flash.geom.Point;
+// import flash.geom.Point;
+	import haxepunk.math.Vector2;
+
 import haxepunk.HXP;
 import haxepunk.Graphic;
 import haxepunk.Mask;
 import haxepunk.graphics.Graphiclist;
 import haxepunk.graphics.Image;
-import haxepunk.graphics.Text;
-import haxepunk.input.Input;
+// import haxepunk.graphics.Text;
+	import haxepunk.graphics.text.Text;
+// import haxepunk.input.Input;
+	import haxepunk.input.Key;
 import haxepunk.ui.UIComponent;
 import haxepunk.ui.skin.SkinButtonElement;
 import haxepunk.ui.skin.Skin;
@@ -92,7 +96,7 @@ class Button extends UIComponent
 	/**
 	 * Hotkey used to trigger this component
 	 */
-	public var hotkey:Int = 0;
+	public var hotkey:Key = 0;
 
 	/**
 	 * Amount to add to label Y coordinate when this button is pressed.
@@ -130,7 +134,7 @@ class Button extends UIComponent
 		height:Int = 1,
 		text:String = "Button",
 		?onReleased:ButtonCallback,
-		?hotkey:Int = 0,
+		?hotkey:Key = 0,
 		?skin:Skin,
 		?enabled:Bool = true,
 		?mouseManager:MouseManager
@@ -205,12 +209,12 @@ class Button extends UIComponent
 
 		if (hotkey != 0)
 		{
-			if (!isPressed && Input.pressed(hotkey))
+			if (!isPressed && Key.pressed(hotkey))
 			{
 				isKeyed = true;
 				pressedCallback();
 			}
-			if (isKeyed && Input.released(hotkey))
+			if (isKeyed && Key.released(hotkey))
 			{
 				isKeyed = false;
 				if (isPressed) releasedCallback();
