@@ -1,10 +1,10 @@
 package haxepunk.ui;
 
-import flash.text.TextFormatAlign;
+// import flash.text.TextFormatAlign;
 import haxepunk.Graphic;
 import haxepunk.graphics.Graphiclist;
 import haxepunk.graphics.Image;
-import haxepunk.graphics.Text;
+// import haxepunk.graphics.Text;
 import haxepunk.ui.skin.Skin;
 import haxepunk.ui.skin.SkinImage;
 import haxepunk.ui.skin.SkinToggleButtonElement;
@@ -61,10 +61,10 @@ class ToggleButton extends Button
 		?onReleased:ButtonCallback = null,
 		?hotkey:Int = 0,
 		?skin:Skin = null,
-		?enabled:Bool = true,
+		?inputEabled:Bool = true,
 		?mouseManager:MouseManager)
 	{
-		super(x, y, width, height, text, onReleased, hotkey, skin, enabled, mouseManager);
+		super(x, y, width, height, text, onReleased, hotkey, skin, inputEabled, mouseManager);
 
 		this.on = on;
 	}
@@ -107,7 +107,7 @@ class ToggleButton extends Button
 		super.update();
 
 		var graphic:Graphiclist = cast graphic;
-		if (enabled)
+		if (inputEabled)
 		{
 			graphic.children[0] = switch (_currentGraphic)
 			{

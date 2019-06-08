@@ -17,6 +17,7 @@ import haxepunk.ui.skin.SkinButtonElement;
 import haxepunk.ui.skin.Skin;
 import haxepunk.ui.skin.SkinImage;
 
+
 /**
  * A button component.
  */
@@ -39,7 +40,7 @@ class Button extends UIComponent
 	/**
 	 * Whether the button will respond to events.
 	 */
-	public var enabled:Bool = true;
+	public var inputEabled:Bool = true;
 
 	/**
 	 * Function called when the button is pressed.
@@ -136,7 +137,7 @@ class Button extends UIComponent
 		?onReleased:ButtonCallback,
 		?hotkey:Key = 0,
 		?skin:Skin,
-		?enabled:Bool = true,
+		?inputEabled:Bool = true,
 		?mouseManager:MouseManager
 		)
 	{
@@ -146,7 +147,7 @@ class Button extends UIComponent
 
 		this.onReleased = onReleased;
 		this.hotkey = hotkey;
-		this.enabled = enabled;
+		this.inputEabled = inputEabled;
 		this.mouseManager = mouseManager;
 	}
 
@@ -225,7 +226,7 @@ class Button extends UIComponent
 		label.y = labelY + labelPressedOffset * (isPressed ? 1 : 0);
 
 		var graphic:Graphiclist = cast graphic;
-		if (enabled)
+		if (inputEabled)
 		{
 			graphic.children[0] = switch (_currentGraphic)
 			{
@@ -252,7 +253,7 @@ class Button extends UIComponent
 	 */
 	function pressedCallback():Void
 	{
-		if (!enabled) return;
+		if (!inputEabled) return;
 		isPressed = true;
 		setCurrentGraphic();
 		if (onPressed != null) onPressed();

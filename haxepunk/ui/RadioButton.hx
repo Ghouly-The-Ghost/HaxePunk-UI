@@ -55,10 +55,10 @@ class RadioButton extends ToggleButton
 		?onChange:ButtonCallback = null,
 		?hotkey:Int = 0,
 		?skin:Skin = null,
-		?enabled:Bool = true,
+		?inputEabled:Bool = true,
 		?mouseManager:MouseManager)
 	{
-		super(x, y, width, height, on, text, null, hotkey, skin, enabled, mouseManager);
+		super(x, y, width, height, on, text, null, hotkey, skin, inputEabled, mouseManager);
 
 		this.onChange = onChange;
 		this.radioButtonGroup = radioButtonGroup;
