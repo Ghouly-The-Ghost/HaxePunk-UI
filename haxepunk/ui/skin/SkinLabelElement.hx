@@ -1,7 +1,5 @@
 package haxepunk.ui.skin;
 
-import haxepunk.graphics.Text;
-
 /**
  * Base class to used to create a custom Label with background skin
  */

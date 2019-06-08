@@ -1,7 +1,5 @@
 package haxepunk.ui.skin;
 
-import haxepunk.graphics.Text;
-
 /**
  * Base class used to create a custom window skin
  */

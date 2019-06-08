@@ -1,7 +1,5 @@
 package haxepunk.ui.skin;
 
-import haxepunk.graphics.Text;
-
 /**
  * Base class for every skin element that has a label
  */

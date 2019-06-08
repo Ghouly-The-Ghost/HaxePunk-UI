@@ -1,9 +1,5 @@
 package haxepunk.ui.skin;
 
-import haxepunk.graphics.Text;
-import haxepunk.ui.skin.SkinHasLabelElement;
-import haxepunk.ui.skin.SkinImage;
-
 /**
  * Base class used to create a custom Button skin.
  */

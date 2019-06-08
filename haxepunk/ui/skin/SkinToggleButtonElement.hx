@@ -1,7 +1,5 @@
 package haxepunk.ui.skin;
 
-import haxepunk.graphics.Text;
-
 /**
  * Base classed used to create a custom toggle button skin
  */
