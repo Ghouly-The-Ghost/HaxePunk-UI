@@ -69,7 +69,7 @@ class LayoutGroup extends EntityList<Entity>
 	 * Add an Entity. If the Entity isn't a LayoutGroup, it will be wrapped
 	 * in one, so the return value will always have a `layoutData` field.
 	 */
-	override public function add(object:Entity):LayoutGroup
+	override public function add(object:Entity, index:Int=-1):LayoutGroup
 	{
 		if (Std.is(object, ILayout))
 		{
@@ -85,7 +85,7 @@ class LayoutGroup extends EntityList<Entity>
 		}
 		//object.cameras = this.cameras;
 
-		return cast super.add(object);
+		return cast super.add(object, index);
 	}
 
 	/**
@@ -96,12 +96,21 @@ class LayoutGroup extends EntityList<Entity>
 	{
 		if (x == null)
 		{
-			var totalScaleX = HXP.screen.fullScaleX,
-				totalScaleY = HXP.screen.fullScaleY;
+			// TODO: I'm not sure about what changed with screen where
+			// It had fullScaleand Offset variables.. they don't exactly exist anymore
+
+			// var totalScaleX = HXP.screen.fullScaleX,
+			// 	totalScaleY = HXP.screen.fullScaleY;
+			var totalScaleX = HXP.screen.scaleX,
+				totalScaleY = HXP.screen.scaleY;
+			if( HXP.camera != null ){
+				totalScaleX	= HXP.camera.fullScaleX;
+				totalScaleY	= HXP.camera.fullScaleY;
+			}
 
 			// topmost LayoutGroup should fill the screen
-			x = -Math.min(0, HXP.screen.x) / totalScaleX - HXP.screen.offsetX;
-			y = -Math.min(0, HXP.screen.y) / totalScaleY - HXP.screen.offsetY;
+			x = -Math.min(0, HXP.screen.x) / totalScaleX;// - HXP.screen.offsetX;
+			y = -Math.min(0, HXP.screen.y) / totalScaleY;// - HXP.screen.offsetY;
 			parentWidth = HXP.screen.width / totalScaleX - (x * 2);
 			parentHeight = HXP.screen.height / totalScaleY - (y * 2);
 		}
