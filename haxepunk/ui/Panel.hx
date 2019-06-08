@@ -2,16 +2,21 @@ package haxepunk.ui;
 
 import haxepunk.ui.UIComponent;
 
-import flash.display.BitmapData;
-import flash.geom.Point;
-import flash.geom.Rectangle;
+// import flash.display.BitmapData;
+	import haxepunk.graphics.hardware.Texture;
+
+// import flash.geom.Point;
+	import haxepunk.Camera;
+	import haxepunk.math.Vector2;
+// import flash.geom.Rectangle;
+	import haxepunk.math.Rectangle;
 
 import haxepunk.HXP;
 import haxepunk.Graphic;
 import haxepunk.graphics.Graphiclist;
 import haxepunk.tweens.misc.MultiVarTween;
 import haxepunk.utils.Ease;
-import haxepunk.utils.MathUtil;
+import haxepunk.math.MathUtil;
 import haxepunk.ui.skin.Skin;
 
 /**
@@ -32,7 +37,7 @@ class Panel extends UIComponent
 	/**
 	 * Render buffer for this component
 	 */
-	var buffer:BitmapData;
+	var buffer:Texture;
 	/**
 	 * Pointer to the clipping mask used in the rendering process
 	 */
@@ -106,7 +111,8 @@ class Panel extends UIComponent
 		oldX = x;
 		oldY = y;
 
-		buffer = new BitmapData(HXP.width, HXP.height, true, 0x00000000);
+		// buffer = new BitmapData(HXP.width, HXP.height, true, 0x00000000);
+		buffer = Texture.create(HXP.width, HXP.height, true, 0x00000000);
 		bounds = new Rectangle(0, 0, width, height);
 
 		graphic = graphiclist = new Graphiclist();
@@ -144,7 +150,7 @@ class Panel extends UIComponent
 		var index:Int = Lambda.indexOf(_children, uiComponent);
 		if (index < 0) return uiComponent;
 		_children.splice(index, 1);
-		uiComponent.renderTarget = null;
+		// uiComponent.renderTarget = null;
 		uiComponent.removed();
 		uiComponent._panel = null;
 		return uiComponent;
@@ -159,7 +165,7 @@ class Panel extends UIComponent
 		{
 			if (!uiComponent.active)     continue;
 
-			uiComponent.updateTweens();
+			uiComponent.updateTweens(HXP.elapsed);
 			uiComponent.update();
 			if (uiComponent.graphic != null && uiComponent.graphic.active)
 			{
@@ -190,11 +196,11 @@ class Panel extends UIComponent
 		bounds.height = height;
 	}
 
-	override public function render():Void
+	override public function render(camera:Camera):Void
 	{
-		super.render();
+		super.render(camera);
 
-		buffer.fillRect(HXP.bounds, 0x00000000);
+		buffer.clearColor(0x00000000);
 
 		if (oldX != x || oldY != y || _oldScrollX != scrollX || _oldScrollY != scrollY)
 		{
@@ -215,14 +221,14 @@ class Panel extends UIComponent
 		{
 			if (!uiComponent.visible) continue;
 
-			if (uiComponent._camera != null)
+			if (uiComponent.camera != null)
 			{
-				uiComponent._camera.x = uiComponent._camera.y = 0;
+				uiComponent.camera.x = uiComponent.camera.y = 0;
 			}
-			else uiComponent._camera = new Point();
+			else uiComponent.camera = scene.camera;
 
-			uiComponent.renderTarget = buffer;
-			uiComponent.render();
+			// uiComponent.renderTarget = buffer;
+			uiComponent.render(camera);
 		}
 
 		HXP.point.x = relativeX - HXP.camera.x;
@@ -231,8 +237,9 @@ class Panel extends UIComponent
 		bounds.x = x;
 		bounds.y = y;
 
-		var t:BitmapData = (renderTarget != null) ? renderTarget : HXP.buffer;
-		t.copyPixels(buffer, bounds, HXP.point);
+		// TODO: This may possibly be an important thing
+		// var t:BitmapData = (renderTarget != null) ? renderTarget : HXP.buffer;
+		// t.copyPixels(buffer, bounds, HXP.point);
 	}
 
 	/**
@@ -339,5 +346,5 @@ class Panel extends UIComponent
 
 	var _scrolledWithEase:Bool = false;
 
-	static var point:Point = new Point();
+	static var point:Vector2 = new Vector2();
 }
