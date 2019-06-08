@@ -1,13 +1,16 @@
 package haxepunk.ui.skins;
 
-import flash.display.BitmapData;
-import flash.geom.Rectangle;
-import flash.text.TextFormatAlign;
-import openfl.Assets;
+// import flash.display.BitmapData;
+import haxepunk.math.Rectangle;
+import haxepunk.graphics.text.TextAlignType;
 import haxepunk.HXP;
 import haxepunk.Graphic;
-import haxepunk.RenderMode;
+// import haxepunk.RenderMode;
+
+
+import haxepunk.assets.AssetCache;
 import haxepunk.graphics.atlas.AtlasData;
+
 import haxepunk.ui.skin.Skin;
 import haxepunk.ui.skin.SkinButtonElement;
 import haxepunk.ui.skin.SkinHasLabelElement;
@@ -33,12 +36,12 @@ class RolpegeBlue extends Skin
 		button = new SkinButtonElement(gy(0, 0), gy(20, 0), gy(40, 0), gy(20, 0), {
 			color:0x000000,
 			size:16,
-			align:TextFormatAlign.CENTER,
+			align:TextAlignType.CENTER,
 		});
 		toggleButton = new SkinToggleButtonElement(gy(0, 0), gy(20, 0), gy(40, 0), gy(20, 0), gy(0, 20), gy(20, 20), gy(40, 20), gy(20, 20), {
 			color:0x000000,
 			size:16,
-			align:TextFormatAlign.CENTER,
+			align:TextAlignType.CENTER,
 		});
 		radioButton = new SkinToggleButtonElement(gn(0, 40), gn(20, 40), gn(40, 40), gn(20, 40), gn(0, 59), gn(20, 59), gn(40, 59), gn(20, 59), {
 			color:0x000000,
@@ -115,16 +118,17 @@ class RolpegeBlue extends Skin
 		_r.width = w;
 		_r.height = h;
 
-		if (HXP.renderMode == RenderMode.BUFFER)
-		{
-			var b:BitmapData = new BitmapData(w, h, true, 0);
-			b.copyPixels(Assets.getBitmapData(img), _r, HXP.zero, null, null, true);
-			return b;
-		}
-		else
-		{
-			return AtlasData.getAtlasDataByName(img, true).createRegion(_r);
-		}
+		// if (HXP.renderMode == RenderMode.BUFFER)
+		// {
+		// 	var b:BitmapData = new BitmapData(w, h, true, 0);
+		// 	b.copyPixels(openfl.Assets.getBitmapData(img), _r, HXP.zero, null, null, true);
+		// 	return b;
+		// }
+		// else
+		// {
+			// return AtlasData.getAtlasDataByName(img, true).createRegion(_r);
+			return AssetCache.global.getAtlasData(img, true).createRegion(_r);
+		// }
 	}
 
 	var _r:Rectangle = new Rectangle();

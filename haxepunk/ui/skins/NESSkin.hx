@@ -1,10 +1,9 @@
 package haxepunk.ui.skins;
 
-import flash.display.BitmapData;
-import openfl.Assets;
+// import flash.display.BitmapData;
 import haxepunk.HXP;
 import haxepunk.Graphic;
-import haxepunk.RenderMode;
+// import haxepunk.RenderMode; // Does not exist
 import haxepunk.graphics.atlas.AtlasData;
 
 class NESSkin extends Default
@@ -29,15 +28,16 @@ class NESSkin extends Default
 		_r.width = w;
 		_r.height = h;
 
-		if (HXP.renderMode == RenderMode.BUFFER)
-		{
-			var b:BitmapData = new BitmapData(w, h, true, 0);
-			b.copyPixels(Assets.getBitmapData(img), _r, HXP.zero, null, null, true);
-			return b;
-		}
-		else
-		{
-			return AtlasData.getAtlasDataByName(img, true).createRegion(_r);
-		}
+		// if (HXP.renderMode == RenderMode.BUFFER)
+		// {
+		// 	var b:BitmapData = new BitmapData(w, h, true, 0);
+		// 	b.copyPixels(openfl.Assets.getBitmapData(img), _r, HXP.zero, null, null, true);
+		// 	return b;
+		// }
+		// else
+		// {
+			// return AtlasData.getAtlasDataByName(img, true).createRegion(_r);
+			return haxepunk.assets.AssetCache.global.getAtlasData(img, true).createRegion(_r);
+		// }
 	}
 }

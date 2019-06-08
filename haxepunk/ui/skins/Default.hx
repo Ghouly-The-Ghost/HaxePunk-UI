@@ -1,13 +1,15 @@
 package haxepunk.ui.skins;
 
-import flash.display.BitmapData;
-import flash.geom.Rectangle;
-import flash.text.TextFormatAlign;
-import openfl.Assets;
+// import flash.display.BitmapData;
+import haxepunk.math.Rectangle;
+import haxepunk.graphics.text.TextAlignType;
 import haxepunk.HXP;
 import haxepunk.Graphic;
-import haxepunk.RenderMode;
+// import haxepunk.RenderMode; // does not exist
+
+import haxepunk.assets.AssetCache;
 import haxepunk.graphics.atlas.AtlasData;
+
 import haxepunk.ui.skin.Skin;
 import haxepunk.ui.skin.SkinButtonElement;
 import haxepunk.ui.skin.SkinHasLabelElement;
@@ -33,12 +35,12 @@ class Default extends Skin
 		button = new SkinButtonElement(gy(0, 96), gy(24, 96), gy(48, 96), gy(96, 96), {
 			color:0x000000,
 			size:16,
-			align:TextFormatAlign.CENTER,
+			align:TextAlignType.CENTER,
 		});
 		toggleButton = new SkinToggleButtonElement(gy(0, 96), gy(24, 96), gy(48, 96), gy(96, 96), gy(48, 96), gy(48, 96), gy(48, 96), gy(20, 20), {
 			color:0x000000,
 			size:16,
-			align:TextFormatAlign.CENTER,
+			align:TextAlignType.CENTER,
 		});
 		radioButton = new SkinToggleButtonElement(gy(0, 48, 16, 16), gy(16, 48, 16, 16), gy(32, 48, 16, 16), gy(96, 0, 16, 16), gy(32, 48, 16, 16), gy(48, 48, 16, 16), gy(0, 48, 16, 16), gy(96, 16, 16, 16), {
 			color:0x000000,
@@ -115,16 +117,17 @@ class Default extends Skin
 		_r.width = w;
 		_r.height = h;
 
-		if (HXP.renderMode == RenderMode.BUFFER)
-		{
-			var b:BitmapData = new BitmapData(w, h, true, 0);
-			b.copyPixels(Assets.getBitmapData(img), _r, HXP.zero, null, null, true);
-			return b;
-		}
-		else
-		{
-			return AtlasData.getAtlasDataByName(img, true).createRegion(_r);
-		}
+		// if (HXP.renderMode == RenderMode.BUFFER)
+		// {
+		// 	var b:BitmapData = new BitmapData(w, h, true, 0);
+		// 	b.copyPixels(openFL.Assets.getBitmapData(img), _r, HXP.zero, null, null, true);
+		// 	return b;
+		// }
+		// else
+		// {
+			// return AtlasData.getAtlasDataByName(img, true).createRegion(_r);
+			return AssetCache.global.getAtlasData(img, true).createRegion(_r);
+		// }
 	}
 
 	var _r:Rectangle = new Rectangle();
