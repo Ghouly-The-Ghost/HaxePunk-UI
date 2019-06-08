@@ -1,21 +1,21 @@
 package haxepunk.ui;
 
-import flash.text.TextFormatAlign;
-import haxepunk.graphics.Text;
+import haxepunk.graphics.text.TextAlignType;
+import haxepunk.graphics.text.Text;
 import haxepunk.ui.UIComponent;
 import haxepunk.ui.skin.Skin;
 
 /**
  * A basic label component
  */
-@:access(haxepunk.graphics.Text)
+@:access(haxepunk.graphics.text.Text)
 class Label extends UIComponent
 {
 	public static function getTextFromLabelOptions(labelProperties:LabelOptions, text:String = "", ?width:Int, ?height:Int):Text
 	{
 		if (labelProperties == null) labelProperties = {};
 		var labelWidth:Int = width == null ? 0 : width,
-			labelAlign = TextFormatAlign.CENTER,
+			labelAlign = TextAlignType.CENTER,
 			labelX:Float = 0,
 			labelY:Float = 0;
 		if (Reflect.hasField(labelProperties, "width")) labelWidth = Std.int(labelProperties.width);

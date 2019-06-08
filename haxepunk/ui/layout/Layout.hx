@@ -1,7 +1,5 @@
 package haxepunk.ui.layout;
 
-import flash.geom.Point;
-
 abstract AnchorType(Float)
 {
 	public static var Left = 0;
