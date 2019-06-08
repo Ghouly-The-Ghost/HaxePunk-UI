@@ -1,6 +1,5 @@
 package haxepunk.ui;
 
-import haxepunk.graphics.Text;
 import haxepunk.ui.skin.Skin;
 
 /**
